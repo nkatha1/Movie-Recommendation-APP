@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .movie {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            width: 200px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .movie img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .movie h3 {
+            margin-top: 10px;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .movie p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Recommendations</h1>
+    <div class="movie-container">
+        {% if movies %}
+            {% for movie in movies %}
+            <div class="movie">
+                <img src="https://image.tmdb.org/t/p/w200{{ movie['poster_path'] }}" alt="{{ movie['title'] }}">
+                <h3>{{ movie['title'] }}</h3>
+                <p><strong>Release Date:</strong> {{ movie['release_date'] }}</p>
+                <p>{{ movie['overview'][:100] }}...</p>
+                <a href="https://www.themoviedb.org/movie/{{ movie['id'] }}" target="_blank">More Info</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No movies found based on your preferences.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
